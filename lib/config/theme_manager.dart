@@ -87,7 +87,7 @@ class ThemeManager {
         fontSize: 16.sp,
         fontWeight: FontWeight.w500,
       ),
-    )
+    ),
   );
       static final ThemeData dark = ThemeData(
   scaffoldBackgroundColor: ColorsManager.white,
