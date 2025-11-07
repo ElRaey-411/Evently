@@ -1,4 +1,10 @@
 abstract class Validators{
+  static String? defaultValidator(String? text) {
+    if (text!.trim().isEmpty) {
+      return 'This field is required';
+    }
+    return null;
+  }
   static String? validateName(String? name) {
     if (name!.trim().isEmpty) {
       return 'Name is required';

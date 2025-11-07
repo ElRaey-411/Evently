@@ -1,7 +1,7 @@
 import 'package:evently/core/resources/colors_manager.dart';
 import 'package:evently/features/main_layout/profile_tab/profile_tab.dart';
 import 'package:flutter/material.dart';
-
+import '../../core/routes_manager/routes_manager.dart';
 import 'favorite_tab/favorite_tab.dart';
 import 'home_tab/home_tab.dart';
 import 'map_tap/map_tab.dart';
@@ -48,7 +48,9 @@ class _MainLayoutState extends State<MainLayout> {
           elevation: 0,
           shape: StadiumBorder(side: BorderSide(color: ColorsManager.white, width: 4)),
           backgroundColor: ColorsManager.blue,
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushNamed(context, RoutesManager.createEvent);
+          },
           child: Icon(Icons.add),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

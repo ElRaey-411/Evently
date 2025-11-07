@@ -7,6 +7,7 @@ class ThemeManager {
   static final ThemeData light = ThemeData(
     primaryColor: ColorsManager.blue,
       secondaryHeaderColor: ColorsManager.white,
+      shadowColor: ColorsManager.grey,
       useMaterial3: false,
       scaffoldBackgroundColor: ColorsManager.white,
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
@@ -31,11 +32,11 @@ class ThemeManager {
         ),
       ),
     inputDecorationTheme: InputDecorationTheme(
-      enabledBorder: OutlineInputBorder(
 
+      enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(16.r),
         borderSide: BorderSide(
-          width: 1.5.w,
+          width: 1.w,
           color: ColorsManager.grey,
         ),
       ),
@@ -70,6 +71,7 @@ class ThemeManager {
     ),
     elevatedButtonTheme:  ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
+        elevation: 0,
         padding: REdgeInsets.symmetric(vertical: 16),
         backgroundColor: ColorsManager.blue,
         foregroundColor: ColorsManager.white,
@@ -83,13 +85,34 @@ class ThemeManager {
 
       )
     ),
+    outlinedButtonTheme: OutlinedButtonThemeData(
+      style:  OutlinedButton.styleFrom(
+        side: BorderSide(
+          color: ColorsManager.blue,
+          width: 1.w,
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16.r),
+        ),
+      ),
+    ),
     textTheme: TextTheme(
+        bodyLarge: GoogleFonts.inter(
+          color: ColorsManager.black1c,
+          fontSize: 20.sp,
+          fontWeight: FontWeight.bold,
+        ),
       bodyMedium: GoogleFonts.inter(
         color: ColorsManager.black1c,
         fontSize: 16.sp,
         fontWeight: FontWeight.w500,
       ),
+      bodySmall: GoogleFonts.inter(
+        color: ColorsManager.black1c,
+        fontSize: 14.sp,
+        fontWeight: FontWeight.bold,
 
+      ),
       titleSmall: GoogleFonts.inter(
         color: ColorsManager.white,
         fontSize: 14.sp,
@@ -114,7 +137,19 @@ class ThemeManager {
     color: ColorsManager.white,
       fontSize: 16.sp,
       fontWeight: FontWeight.w500,
-    )
+    ),
+      labelLarge: GoogleFonts.inter(
+    color: ColorsManager.blue,
+      fontSize: 20.sp,
+      fontWeight: FontWeight.bold,
+    ),
+      headlineMedium: GoogleFonts.inter(
+        color: ColorsManager.white,
+        fontSize: 20.sp,
+        fontWeight: FontWeight.w500,
+      ),
+
+
     )
   );
       static final ThemeData dark = ThemeData(

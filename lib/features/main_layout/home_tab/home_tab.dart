@@ -2,7 +2,9 @@ import 'package:evently/core/models/category_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../core/models/event_model.dart';
 import '../../../core/widgets/custom_tab_bar.dart';
+import '../../../core/widgets/event_item.dart';
 
 class HomeTab extends StatefulWidget {
   const HomeTab({super.key});
@@ -87,12 +89,16 @@ class _HomeTabState extends State<HomeTab> {
                     });
                   },
                   isScrollable: true,
-                  tabs: CategoryModel.Categories.map(
+                  tabs: CategoryModel.CategoriesWithAll.map(
                     (Category) => CustomTabBar(
+                      selectedBg: Theme.of(context).secondaryHeaderColor,
+                      unselectedBg: Theme.of(context).primaryColor,
+                      selectedTextColor: Theme.of(context).primaryColor,
+                      unselectedTextColor: Theme.of(context).secondaryHeaderColor,
                       Category: Category,
                       isSelected:
                           SelectedIndex ==
-                          CategoryModel.Categories.indexOf(Category),
+                          CategoryModel.CategoriesWithAll.indexOf(Category),
                     ),
                   ).toList(),
                 ),
@@ -100,7 +106,18 @@ class _HomeTabState extends State<HomeTab> {
             ],
           ),
         ),
+         Expanded(
+           child: ListView.builder(
+               itemBuilder:
+               (context, index) => EventItem(
+                 event: EventModel.Events[index],
+               ),
+               itemCount: EventModel.Events.length,
+           ),
+         )
       ],
     ),
   );
+
+
 }

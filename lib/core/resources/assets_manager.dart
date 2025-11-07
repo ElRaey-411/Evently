@@ -3,6 +3,7 @@ abstract class ImageAssets{
   static const String lightPotosbase = "assets/images/events_light_photos/";
   static const String darkPotosbase = "assets/images/events_dark_photos/";
   static const String eventlyLogo = "${base}evently_logo.png";
+  static const String routeLogo = "${base}route_logo.png";
   ///-----------------------------------------------------------------
   static const String lightBirthday = "${lightPotosbase}birthday.png";
   static const String lightBookClub = "${lightPotosbase}book_club.png";
