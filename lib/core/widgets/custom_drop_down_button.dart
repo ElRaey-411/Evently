@@ -22,7 +22,7 @@ class _CustomDropDownButtonState extends State<CustomDropDownButton> {
   Widget build(BuildContext context) => Container(
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(16.r),
-      border: Border.all(color: Theme.of(context).primaryColor),
+      border: Border.all(color: Theme.of(context).highlightColor),
     ),
     child: Padding(
       padding: REdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -37,7 +37,7 @@ class _CustomDropDownButtonState extends State<CustomDropDownButton> {
             child: DropdownButton<String>(
               icon: Icon(
                 Icons.arrow_drop_down,
-                color: Theme.of(context).primaryColor,
+                color: Theme.of(context).highlightColor,
               ),
               items: widget.itemsList
                   .map(

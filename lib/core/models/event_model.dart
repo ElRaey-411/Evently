@@ -14,24 +14,23 @@ class EventModel{
   DateTime eventDateTime;
   String? eventLocation;
 
-  static List<EventModel> Events = [
-    EventModel(category: CategoryModel.Categories[0], eventTitle: "its my birthday", eventDescription: "dawdawda wdawda wd", eventDateTime: DateTime.now()),
-    EventModel(category: CategoryModel.Categories[0], eventTitle: "its my birthday", eventDescription: "dawdawda wdawda wd", eventDateTime: DateTime.now()),
-    EventModel(category: CategoryModel.Categories[0], eventTitle: "its my birthday", eventDescription: "dawdawda wdawda wd", eventDateTime: DateTime.now()),
-    EventModel(category: CategoryModel.Categories[0], eventTitle: "its my birthday", eventDescription: "dawdawda wdawda wd", eventDateTime: DateTime.now()),
-    EventModel(category: CategoryModel.Categories[0], eventTitle: "its my birthday", eventDescription: "dawdawda wdawda wd", eventDateTime: DateTime.now()),
-    EventModel(category: CategoryModel.Categories[0], eventTitle: "its my birthday", eventDescription: "dawdawda wdawda wd", eventDateTime: DateTime.now()),
-    EventModel(category: CategoryModel.Categories[0], eventTitle: "its my birthday", eventDescription: "dawdawda wdawda wd", eventDateTime: DateTime.now()),
-    EventModel(category: CategoryModel.Categories[0], eventTitle: "its my birthday", eventDescription: "dawdawda wdawda wd", eventDateTime: DateTime.now()),
-    EventModel(category: CategoryModel.Categories[0], eventTitle: "its my birthday", eventDescription: "dawdawda wdawda wd", eventDateTime: DateTime.now()),
-    EventModel(category: CategoryModel.Categories[0], eventTitle: "its my birthday", eventDescription: "dawdawda wdawda wd", eventDateTime: DateTime.now()),
-    EventModel(category: CategoryModel.Categories[0], eventTitle: "its my birthday", eventDescription: "dawdawda wdawda wd", eventDateTime: DateTime.now()),
-    EventModel(category: CategoryModel.Categories[0], eventTitle: "its my birthday", eventDescription: "dawdawda wdawda wd", eventDateTime: DateTime.now()),
-    EventModel(category: CategoryModel.Categories[0], eventTitle: "its my birthday", eventDescription: "dawdawda wdawda wd", eventDateTime: DateTime.now()),
-    EventModel(category: CategoryModel.Categories[0], eventTitle: "its my birthday", eventDescription: "dawdawda wdawda wd", eventDateTime: DateTime.now()),
-    EventModel(category: CategoryModel.Categories[0], eventTitle: "its my birthday", eventDescription: "dawdawda wdawda wd", eventDateTime: DateTime.now()),
-    EventModel(category: CategoryModel.Categories[0], eventTitle: "its my birthday", eventDescription: "dawdawda wdawda wd", eventDateTime: DateTime.now()),
-    EventModel(category: CategoryModel.Categories[0], eventTitle: "its my birthday", eventDescription: "dawdawda wdawda wd", eventDateTime: DateTime.now()),
+  static List<EventModel> events = [
+    EventModel(category: CategoryModel.categories[0], eventTitle: "its my birthday", eventDescription: "dawdawda wdawda wd", eventDateTime: DateTime.now()),
+    EventModel(category: CategoryModel.categories[0], eventTitle: "its my birthday", eventDescription: "dawdawda wdawda wd", eventDateTime: DateTime.now()),
+    EventModel(category: CategoryModel.categories[0], eventTitle: "its my birthday", eventDescription: "dawdawda wdawda wd", eventDateTime: DateTime.now()),
+    EventModel(category: CategoryModel.categories[0], eventTitle: "its my birthday", eventDescription: "dawdawda wdawda wd", eventDateTime: DateTime.now()),
+    EventModel(category: CategoryModel.categories[0], eventTitle: "its my birthday", eventDescription: "dawdawda wdawda wd", eventDateTime: DateTime.now()),
+    EventModel(category: CategoryModel.categories[0], eventTitle: "its my birthday", eventDescription: "dawdawda wdawda wd", eventDateTime: DateTime.now()),
+    EventModel(category: CategoryModel.categories[0], eventTitle: "its my birthday", eventDescription: "dawdawda wdawda wd", eventDateTime: DateTime.now()),
+    EventModel(category: CategoryModel.categories[0], eventTitle: "its my birthday", eventDescription: "dawdawda wdawda wd", eventDateTime: DateTime.now()),
+    EventModel(category: CategoryModel.categories[0], eventTitle: "its my birthday", eventDescription: "dawdawda wdawda wd", eventDateTime: DateTime.now()),
+    EventModel(category: CategoryModel.categories[0], eventTitle: "its my birthday", eventDescription: "dawdawda wdawda wd", eventDateTime: DateTime.now()),
+    EventModel(category: CategoryModel.categories[0], eventTitle: "its my birthday", eventDescription: "dawdawda wdawda wd", eventDateTime: DateTime.now()),
+    EventModel(category: CategoryModel.categories[0], eventTitle: "its my birthday", eventDescription: "dawdawda wdawda wd", eventDateTime: DateTime.now()),
+    EventModel(category: CategoryModel.categories[0], eventTitle: "its my birthday", eventDescription: "dawdawda wdawda wd", eventDateTime: DateTime.now()),
+    EventModel(category: CategoryModel.categories[0], eventTitle: "its my birthday", eventDescription: "dawdawda wdawda wd", eventDateTime: DateTime.now()),
+    EventModel(category: CategoryModel.categories[0], eventTitle: "its my birthday", eventDescription: "dawdawda wdawda wd", eventDateTime: DateTime.now()),
+    EventModel(category: CategoryModel.categories[0], eventTitle: "its my birthday", eventDescription: "dawdawda wdawda wd", eventDateTime: DateTime.now()),
   ];
 
 

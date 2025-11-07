@@ -40,9 +40,9 @@ class _FavoriteTabState extends State<FavoriteTab> {
               child: ListView.builder(
                 itemBuilder:
                     (context, index) => EventItem(
-                  event: EventModel.Events[index],
+                  event: EventModel.events[index],
                 ),
-                itemCount: EventModel.Events.length,
+                itemCount: EventModel.events.length,
               ),
             )
           ],

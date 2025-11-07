@@ -15,7 +15,7 @@ class CategoryModel{
   String? darkPhotoPath;
   IconData icon;
 
- static List<CategoryModel> CategoriesWithAll = [
+ static List<CategoryModel> categoriesWithAll = [
     CategoryModel(id: "0", name: "All",icon: Icons.all_inclusive, lightPhotoPath:null, darkPhotoPath: null),
     CategoryModel(id: "1", name: "Birthday",icon: Icons.cake_rounded, lightPhotoPath: ImageAssets.lightBirthday, darkPhotoPath: ImageAssets.darkBirthday),
     CategoryModel(id: "2", name: "Book Club",icon: Icons.book_outlined, lightPhotoPath: ImageAssets.lightBookClub, darkPhotoPath: ImageAssets.darkBookClub),
@@ -27,7 +27,7 @@ class CategoryModel{
     CategoryModel(id: "8", name: "Sport",icon: Icons.sports_football_rounded, lightPhotoPath: ImageAssets.lightSport, darkPhotoPath: ImageAssets.darkSport),
     CategoryModel(id: "9", name: "Work Shop",icon: Icons.workspaces_rounded, lightPhotoPath: ImageAssets.lightWorkShop, darkPhotoPath: ImageAssets.darkWorkShop),
   ];
- static List<CategoryModel> Categories = [
+ static List<CategoryModel> categories = [
     CategoryModel(id: "1", name: "Birthday",icon: Icons.cake_rounded, lightPhotoPath: ImageAssets.lightBirthday, darkPhotoPath: ImageAssets.darkBirthday),
     CategoryModel(id: "2", name: "Book Club",icon: Icons.book_outlined, lightPhotoPath: ImageAssets.lightBookClub, darkPhotoPath: ImageAssets.darkBookClub),
     CategoryModel(id: "3", name: "Eating",icon: Icons.local_pizza_rounded, lightPhotoPath: ImageAssets.lightEating, darkPhotoPath: ImageAssets.darkEating),

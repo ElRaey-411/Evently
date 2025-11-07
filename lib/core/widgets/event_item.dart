@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
+import 'package:provider/provider.dart';
+import '../../config/providers/config_provider.dart';
 import '../models/event_model.dart';
 
 class EventItem extends StatelessWidget {
@@ -9,21 +10,38 @@ class EventItem extends StatelessWidget {
   EventModel event;
 
   @override
-  Widget build(BuildContext context) => Container(
+  Widget build(BuildContext context) {
+    var configProvider = Provider.of<ConfigProvider>(context);
+    return Container(
     margin: REdgeInsets.only(bottom: 16, left: 16, right: 16),
     decoration: BoxDecoration(borderRadius: BorderRadius.circular(16.r)),
     child: Stack(
       children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(16.r),
-          child: Image.asset(event.category.lightPhotoPath!),
+        Container(
+          decoration: BoxDecoration(
+            border: Border.all(
+              width: 1.w,
+              color: Theme.of(context).highlightColor,
+            ),
+            borderRadius: BorderRadius.circular(16.r),
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(16.r),
+            child: Image.asset(
+              configProvider.isDark?
+              event.category.darkPhotoPath!:event.category.lightPhotoPath!,
+              fit: BoxFit.cover,
+              width: double.infinity,
+            ),
+          ),
         ),
+
         Positioned(
           top: 8.h,
           left: 8.h,
           child: Card(
             elevation: 0,
-            color: Theme.of(context).secondaryHeaderColor,
+            color: Theme.of(context).hoverColor,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8.r),
             ),
@@ -51,7 +69,7 @@ class EventItem extends StatelessWidget {
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8.r),
-              color: Theme.of(context).secondaryHeaderColor,
+              color: Theme.of(context).hoverColor,
             ),
             child: Padding(
               padding: REdgeInsets.symmetric(horizontal: 8),
@@ -63,11 +81,10 @@ class EventItem extends StatelessWidget {
                   ),
                   Spacer(),
                   IconButton(
-                    onPressed: () {
-                    },
+                    onPressed: () {},
                     icon: Icon(
                       Icons.favorite_border_outlined,
-                      color: Theme.of(context).primaryColor,
+                      color: Theme.of(context).highlightColor,
                     ),
                   ),
                 ],
@@ -78,6 +95,7 @@ class EventItem extends StatelessWidget {
       ],
     ),
   );
+  }
 
   String getMonthName(int month) {
     switch (month) {

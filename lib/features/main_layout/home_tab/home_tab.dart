@@ -17,107 +17,137 @@ class _HomeTabState extends State<HomeTab> {
   int SelectedIndex = 0;
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-    body: Column(
-      children: [
-        Container(
-          padding: REdgeInsets.only(top: 49, left: 16, right: 16, bottom: 16),
-          width: double.infinity,
-          decoration: BoxDecoration(
-            color: Theme.of(context).primaryColor,
-            borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(16.r),
-              bottomRight: Radius.circular(16.r),
-            ),
-          ),
-          child: Column(
-            children: [
-              Row(
+  Widget build(BuildContext context) {
+    return
+      Scaffold(
+        body: Column(
+          children: [
+            Container(
+              padding: REdgeInsets.only(
+                  top: 49, left: 16, right: 16, bottom: 16),
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: Theme
+                    .of(context)
+                    .primaryColor,
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(16.r),
+                  bottomRight: Radius.circular(16.r),
+                ),
+              ),
+              child: Column(
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  Row(
                     children: [
-                      Text(
-                        "Welcome Back ✨",
-                        style: Theme.of(context).textTheme.titleSmall,
-                      ),
-                      SizedBox(height: 5.h),
-                      Text(
-                        "Ahmed",
-                        style: Theme.of(context).textTheme.titleLarge,
-                      ),
-                      SizedBox(height: 11.h),
-                      Row(
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Icon(Icons.location_on_outlined, color: Colors.white),
-                          SizedBox(width: 5.w),
                           Text(
-                            "Cairo, Egypt",
-                            style: Theme.of(context).textTheme.titleSmall,
+                            "Welcome Back ✨",
+                            style: Theme
+                                .of(context)
+                                .textTheme
+                                .titleSmall,
+                          ),
+                          SizedBox(height: 5.h),
+                          Text(
+                            "Ahmed",
+                            style: Theme
+                                .of(context)
+                                .textTheme
+                                .titleLarge,
+                          ),
+                          SizedBox(height: 11.h),
+                          Row(
+                            children: [
+                              Icon(Icons.location_on_outlined, color: Colors
+                                  .white),
+                              SizedBox(width: 5.w),
+                              Text(
+                                "Cairo, Egypt",
+                                style: Theme
+                                    .of(context)
+                                    .textTheme
+                                    .titleSmall,
+                              ),
+                            ],
                           ),
                         ],
                       ),
+                      Spacer(),
+                      Icon(Icons.wb_sunny_outlined, color: Colors.white),
+                      SizedBox(width: 5.w),
+                      Card(
+                        elevation: 0,
+                        color: Theme
+                            .of(context)
+                            .primaryColorLight,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8.r),
+                        ),
+                        child: Padding(
+                          padding: REdgeInsets.all(8.0),
+                          child: Text(
+                            "EN",
+                            style: Theme
+                                .of(context)
+                                .textTheme
+                                .headlineSmall,
+                          ),
+                        ),
+                      ),
                     ],
                   ),
-                  Spacer(),
-                  Icon(Icons.wb_sunny_outlined, color: Colors.white),
-                  SizedBox(width: 5.w),
-                  Card(
-                    elevation: 0,
-                    color: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8.r),
-                    ),
-                    child: Padding(
-                      padding: REdgeInsets.all(8.0),
-                      child: Text(
-                        "EN",
-                        style: Theme.of(context).textTheme.titleMedium,
-                      ),
+                  SizedBox(height: 16.h),
+                  DefaultTabController(
+                    length: 10,
+                    child: TabBar(
+                      indicatorColor: Colors.transparent,
+                      onTap: (index) {
+                        setState(() {
+                          SelectedIndex = index;
+                        });
+                      },
+                      isScrollable: true,
+                      tabs: CategoryModel.categoriesWithAll.map(
+                            (Category) =>
+                            CustomTabBar(
+                              selectedBg: Theme
+                                  .of(context)
+                                  .secondaryHeaderColor,
+                              unselectedBg: Colors.transparent,
+                              selectedTextColor: Theme
+                                  .of(context)
+                                  .primaryColorDark,
+                              unselectedTextColor: Theme
+                                  .of(context)
+                                  .primaryColorLight,
+                              Category: Category,
+                              isSelected:
+                              SelectedIndex ==
+                                  CategoryModel.categoriesWithAll.indexOf(
+                                      Category),
+                            ),
+                      ).toList(),
                     ),
                   ),
                 ],
               ),
-              SizedBox(height: 16.h),
-              DefaultTabController(
-                length: 10,
-                child: TabBar(
-                  indicatorColor: Colors.transparent,
-                  onTap: (index) {
-                    setState(() {
-                      SelectedIndex = index;
-                    });
-                  },
-                  isScrollable: true,
-                  tabs: CategoryModel.CategoriesWithAll.map(
-                    (Category) => CustomTabBar(
-                      selectedBg: Theme.of(context).secondaryHeaderColor,
-                      unselectedBg: Theme.of(context).primaryColor,
-                      selectedTextColor: Theme.of(context).primaryColor,
-                      unselectedTextColor: Theme.of(context).secondaryHeaderColor,
-                      Category: Category,
-                      isSelected:
-                          SelectedIndex ==
-                          CategoryModel.CategoriesWithAll.indexOf(Category),
+            ),
+            Expanded(
+              child: ListView.builder(
+                itemBuilder:
+                    (context, index) =>
+                    EventItem(
+                      event: EventModel.events[index],
                     ),
-                  ).toList(),
-                ),
+                itemCount: EventModel.events.length,
               ),
-            ],
-          ),
+            )
+          ],
         ),
-         Expanded(
-           child: ListView.builder(
-               itemBuilder:
-               (context, index) => EventItem(
-                 event: EventModel.Events[index],
-               ),
-               itemCount: EventModel.Events.length,
-           ),
-         )
-      ],
-    ),
-  );
+      );
+  }
 
 
 }
