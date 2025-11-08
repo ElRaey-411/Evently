@@ -1,6 +1,6 @@
 import 'package:evently/core/functions/validators.dart';
-import 'package:evently/core/models/event_model.dart';
 import 'package:evently/core/widgets/custom_text_button.dart';
+import 'package:evently/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -11,20 +11,18 @@ import '../../core/widgets/custom_tab_bar.dart';
 import '../../core/widgets/custom_text_form.dart';
 
 class CreateEvent extends StatefulWidget {
+  const CreateEvent({super.key});
+
   @override
   State<CreateEvent> createState() => _CreateEventState();
 }
 
 class _CreateEventState extends State<CreateEvent> {
-  late EventModel eventModel = EventModel(
-    category: CategoryModel.categories[SelectedIndex],
-    eventTitle: "",
-    eventDescription: "",
-    eventDateTime: DateTime.now(),
-  );
+  late CategoryModel categoryModel = CategoryModel.getCategories(context)[0];
   int SelectedIndex = 0;
   String? selectedTime ;
   String? selectedDate;
+  late final bool isSelected;
   late TextEditingController titleController = TextEditingController();
   late TextEditingController descriptionController = TextEditingController();
   final _FormKey = GlobalKey<FormState>();
@@ -46,11 +44,12 @@ class _CreateEventState extends State<CreateEvent> {
   @override
   Widget build(BuildContext context) {
     var configProvider = Provider.of<ConfigProvider>(context);
+    AppLocalizations appLocalizations = AppLocalizations.of(context)!;
     return
       Scaffold(
         appBar: AppBar(
           title: Text(
-            "Create Event",
+            appLocalizations.create_event,
             style: Theme
                 .of(context)
                 .textTheme
@@ -80,47 +79,24 @@ class _CreateEventState extends State<CreateEvent> {
                       borderRadius: BorderRadius.circular(16.r),
                       child: Image.asset(
                         configProvider.isDark?
-                        eventModel.category.darkPhotoPath!:eventModel.category.lightPhotoPath!,
+                        categoryModel.darkPhotoPath!:categoryModel.lightPhotoPath!,
                         fit: BoxFit.cover,
                       ),
                     ),
                   ),
 
                   SizedBox(height: 16.h),
-                  DefaultTabController(
-                    length: 9,
-                    child: TabBar(
-                      indicatorColor: Colors.transparent,
-                      onTap: (index) {
-                        setState(() {
-                          SelectedIndex = index;
-                          eventModel.category = CategoryModel.categories[index];
-                        });
-                      },
-                      isScrollable: true,
-                      tabs: CategoryModel.categories.map(
-                            (Category) =>
-                            CustomTabBar(
-                              selectedBg: Theme
-                                  .of(context)
-                                  .highlightColor,
-                              unselectedBg: Colors.transparent,
-                              selectedTextColor: Theme
-                                  .of(context)
-                                  .hoverColor,
-                              unselectedTextColor: Theme
-                                  .of(context)
-                                  .highlightColor,
-                              Category: Category,
-                              isSelected:
-                              SelectedIndex ==
-                                  CategoryModel.categories.indexOf(Category),
-                            ),
-                      ).toList(),
-                    ),
+                  CustomTabBar(
+                    categories: CategoryModel.getCategories(context),
+                    selectedIndex: SelectedIndex,
+                    selectedBg: Theme.of(context).highlightColor,
+                    unselectedBg: Colors.transparent,
+                    selectedTextColor: Theme.of(context).hoverColor,
+                    unselectedTextColor: Theme.of(context).highlightColor,
+                    onPressed: onPressed,
                   ),
                   SizedBox(height: 16.h),
-                  Text("Title", style: Theme
+                  Text(appLocalizations.title, style: Theme
                       .of(context)
                       .textTheme
                       .bodyMedium),
@@ -128,13 +104,13 @@ class _CreateEventState extends State<CreateEvent> {
                   CustomTextForm(
                     controller: titleController,
                     prefixIcon: Icon(Icons.title),
-                    hintText: "Event Title",
+                    hintText: appLocalizations.event_title,
                     keyboardType: TextInputType.text,
                     validator: (value) => Validators.defaultValidator(context, value),
                   ),
                   SizedBox(height: 16.h),
                   Text(
-                    "Description",
+                    appLocalizations.description,
                     style: Theme
                         .of(context)
                         .textTheme
@@ -143,7 +119,7 @@ class _CreateEventState extends State<CreateEvent> {
                   SizedBox(height: 8.h),
                   CustomTextForm(
                     controller: descriptionController,
-                    hintText: "  Event Description",
+                    hintText: appLocalizations.event_description,
                     keyboardType: TextInputType.text,
                     validator: (value) => Validators.defaultValidator(context, value),
                     maxLines: 4,
@@ -156,9 +132,7 @@ class _CreateEventState extends State<CreateEvent> {
                           .disabledColor,),
                       SizedBox(width: 14.w),
                       Text(
-                        "${selectedDate == null
-                            ? "Choose Date"
-                            : selectedDate}",
+                        selectedDate?? appLocalizations.choose_date,
                         style: Theme
                             .of(context)
                             .textTheme
@@ -166,7 +140,7 @@ class _CreateEventState extends State<CreateEvent> {
                       ),
                       Spacer(),
                       CustomTextButton(
-                        text: "Choose Date",
+                        text: appLocalizations.choose_date,
                         onPressed: () {
                           showDatePicker(
                             context: context,
@@ -194,16 +168,14 @@ class _CreateEventState extends State<CreateEvent> {
                           .disabledColor,),
                       SizedBox(width: 14.w),
                       Text(
-                        "${selectedTime == null
-                            ? "Choose Time"
-                            : selectedTime}",
+                        selectedTime ?? appLocalizations.choose_time,
                         style: Theme
                             .of(context)
                             .textTheme
                             .bodyMedium,
                       ),
                       Spacer(),
-                      CustomTextButton(text: "Choose Time", onPressed: () {
+                      CustomTextButton(text: appLocalizations.choose_time, onPressed: () {
                         showTimePicker(
                           context: context,
                           initialTime: TimeOfDay.now(),
@@ -242,7 +214,7 @@ class _CreateEventState extends State<CreateEvent> {
                           ),
                         ),
                         Text(
-                          "choose Location",
+                          appLocalizations.choose_event_location,
                           style: Theme
                               .of(context)
                               .textTheme
@@ -260,10 +232,12 @@ class _CreateEventState extends State<CreateEvent> {
                   ),
                   SizedBox(height: 16.h),
                   CustomElevatedButton(
-                    title: "Add Event",
+                    title: appLocalizations.add_event,
                     onPressed: () {
                       if (_FormKey.currentState!.validate() ||
-                          selectedTime == null || selectedDate == null) return;
+                          selectedTime == null || selectedDate == null) {
+                        return;
+                      }
                     },
                   ),
                 ],
@@ -273,5 +247,11 @@ class _CreateEventState extends State<CreateEvent> {
         ),
 
       );
+  }
+  void onPressed(int index) {
+    setState(() {
+      SelectedIndex = index;
+      categoryModel = CategoryModel.getCategories(context)[index];
+    });
   }
 }

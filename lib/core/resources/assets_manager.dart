@@ -24,7 +24,7 @@ abstract class ImageAssets{
   static const String darkHoliday = "${darkPotosbase}holiday.png";
   static const String darkMeeting= "${darkPotosbase}meeting.png";
   static const String darkSport = "${darkPotosbase}sport.png";
-  static const String darkWorkShop = "${darkPotosbase}work_shop.png";
+  static const String darkWorkShop = "${darkPotosbase}workshop.png";
 
 
 

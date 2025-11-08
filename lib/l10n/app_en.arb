@@ -9,6 +9,7 @@
 "password_must_contain_letters_and_numbers":"Password must contain letters and numbers",
 "re_Password_is_required":"Re-Password is required",
 "passwords_do_not_match":"Passwords do not match",
+"create_event":"Create Event",
 "register":"Register",
 "name":"Name",
 "email":"Email",

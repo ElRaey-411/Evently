@@ -81,11 +81,10 @@ class _ProfileTabState extends State<ProfileTab> {
               padding: REdgeInsets.symmetric(horizontal: 16),
               child: CustomDropDownButton(
                 itemsList: ["English", "العربيه"],
-                selecetedItem: selectedLanguage,
-                onChanged: (value) {
+                selecetedItem: configProvider.isEnglish? "English":"العربيه",
+                onChanged: (newLanguage) {
                   setState(() {
-                    selectedLanguage = value!;
-
+                    configProvider.changeLanguage(newLanguage=="English"? "en":"ar" );
                   });
                 },
               ),

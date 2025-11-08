@@ -158,6 +158,12 @@ abstract class AppLocalizations {
   /// **'Passwords do not match'**
   String get passwords_do_not_match;
 
+  /// No description provided for @create_event.
+  ///
+  /// In en, this message translates to:
+  /// **'Create Event'**
+  String get create_event;
+
   /// No description provided for @register.
   ///
   /// In en, this message translates to:

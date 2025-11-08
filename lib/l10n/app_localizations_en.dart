@@ -42,6 +42,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get passwords_do_not_match => 'Passwords do not match';
 
   @override
+  String get create_event => 'Create Event';
+
+  @override
   String get register => 'Register';
 
   @override

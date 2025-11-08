@@ -1,10 +1,12 @@
 import 'package:evently/core/models/category_model.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/models/event_model.dart';
 import '../../../core/widgets/custom_tab_bar.dart';
 import '../../../core/widgets/event_item.dart';
+import '../../../l10n/app_localizations.dart';
 
 class HomeTab extends StatefulWidget {
   const HomeTab({super.key});
@@ -15,9 +17,12 @@ class HomeTab extends StatefulWidget {
 
 class _HomeTabState extends State<HomeTab> {
   int SelectedIndex = 0;
+  late final bool isSelected = false;
+
 
   @override
   Widget build(BuildContext context) {
+    AppLocalizations appLocalizations = AppLocalizations.of(context)!;
     return
       Scaffold(
         body: Column(
@@ -43,7 +48,7 @@ class _HomeTabState extends State<HomeTab> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Welcome Back ✨",
+                            "${appLocalizations.welcome_back} ✨",
                             style: Theme
                                 .of(context)
                                 .textTheme
@@ -99,38 +104,16 @@ class _HomeTabState extends State<HomeTab> {
                     ],
                   ),
                   SizedBox(height: 16.h),
-                  DefaultTabController(
-                    length: 10,
-                    child: TabBar(
-                      indicatorColor: Colors.transparent,
-                      onTap: (index) {
-                        setState(() {
-                          SelectedIndex = index;
-                        });
-                      },
-                      isScrollable: true,
-                      tabs: CategoryModel.categoriesWithAll.map(
-                            (Category) =>
-                            CustomTabBar(
-                              selectedBg: Theme
-                                  .of(context)
-                                  .secondaryHeaderColor,
-                              unselectedBg: Colors.transparent,
-                              selectedTextColor: Theme
-                                  .of(context)
-                                  .primaryColorDark,
-                              unselectedTextColor: Theme
-                                  .of(context)
-                                  .primaryColorLight,
-                              Category: Category,
-                              isSelected:
-                              SelectedIndex ==
-                                  CategoryModel.categoriesWithAll.indexOf(
-                                      Category),
-                            ),
-                      ).toList(),
-                    ),
-                  ),
+                  CustomTabBar(
+                    categories: CategoryModel.getCategoriesWithAll(context),
+                    selectedIndex: SelectedIndex,
+                    selectedBg: Theme.of(context).secondaryHeaderColor,
+                    unselectedBg: Colors.transparent,
+                    selectedTextColor: Theme.of(context).primaryColorDark,
+                    unselectedTextColor: Theme.of(context).primaryColorLight,
+                    onPressed: onPressed,
+                  )
+
                 ],
               ),
             ),
@@ -139,15 +122,19 @@ class _HomeTabState extends State<HomeTab> {
                 itemBuilder:
                     (context, index) =>
                     EventItem(
-                      event: EventModel.events[index],
+                      event: EventModel.getEvents(context)[index],
                     ),
-                itemCount: EventModel.events.length,
+                itemCount: EventModel.getEvents(context).length,
               ),
             )
           ],
         ),
       );
   }
-
+  void onPressed(int index) {
+    setState(() {
+      SelectedIndex = index;
+    });
+  }
 
 }

@@ -5,12 +5,14 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'config/providers/config_provider.dart';
+import 'core/prefs_manager/prefs_manager.dart';
 import 'core/routes_manager/routes_manager.dart';
 import 'firebase_options.dart';
 import 'l10n/app_localizations.dart';
 
 Future<void> main () async{
   WidgetsFlutterBinding.ensureInitialized();
+  await PrefsManager.init();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -36,7 +38,7 @@ class EventlyApp extends StatelessWidget {
               theme: ThemeManager.light,
               darkTheme: ThemeManager.dark,
               themeMode: configProvider.currentTheme,
-              locale: Locale("en"),
+              locale: Locale(configProvider.currentLanguage),
               localizationsDelegates: AppLocalizations.localizationsDelegates,
               supportedLocales: [
                 Locale('en'),
