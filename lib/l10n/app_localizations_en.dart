@@ -9,10 +9,48 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
+  String get successfully_registered => 'Successfully Registered';
+
+  @override
+  String get the_account_already_exists_for_that_email =>
+      'The account already exists for that email.';
+
+  @override
+  String get failed_to_register => 'Failed To Register';
+
+  @override
+  String get successfully_logged_in => 'Successfully Logged In';
+
+  @override
+  String get invalid_email_or_password => 'Invalid Email or Password';
+
+  @override
+  String get failed_to_login => 'Failed To Login';
+
+  @override
+  String get successfully_logged_out => 'Successfully logged out';
+
+  @override
+  String get please_select_time_and_date => 'Please Select Time and Date';
+
+  @override
+  String get event_added_successfully => 'Event added successfully';
+
+  @override
+  String get please_fill_all_fields_correctly =>
+      'Please fill all fields correctly';
+
+  @override
   String get this_field_is_required => 'This field is required';
 
   @override
   String get name_is_required => 'Name is required';
+
+  @override
+  String get no_favourite_events_found => 'No favourite events found';
+
+  @override
+  String get search_for_event => 'Search for Event';
 
   @override
   String get name_must_be_at_least_4_characters =>
@@ -94,9 +132,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get profile => 'Profile';
-
-  @override
-  String get search_for_event => 'Search for Event';
 
   @override
   String get language => 'Language';

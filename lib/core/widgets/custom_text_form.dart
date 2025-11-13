@@ -12,6 +12,8 @@ class CustomTextForm extends StatefulWidget {
     this.validator,
     required this.controller,
     this.maxLines=1,
+    this.onChanged,
+
   });
 
   final String? lableText;
@@ -23,6 +25,8 @@ class CustomTextForm extends StatefulWidget {
   final String? Function(String?)? validator;
   final TextEditingController? controller;
   late final int maxLines;
+  void Function(String)? onChanged;
+
 
   @override
   State<CustomTextForm> createState() => _TextFormState();
@@ -34,6 +38,8 @@ class _TextFormState extends State<CustomTextForm> {
 
   @override
   Widget build(BuildContext context) => TextFormField(
+    onChanged: widget.onChanged,
+    style: Theme.of(context).textTheme.bodySmall,
     maxLines: widget.maxLines,
     controller: widget.controller,
     validator: widget.validator,

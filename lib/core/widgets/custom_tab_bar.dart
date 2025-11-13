@@ -3,11 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../models/category_model.dart';
 
-class CustomTabBar extends StatelessWidget {
+class CustomTabBar extends StatefulWidget {
   CustomTabBar({
     super.key,
     required this.categories,
-    required this.selectedIndex,
     required this.selectedBg,
     required this.unselectedBg,
     required this.selectedTextColor,
@@ -16,55 +15,67 @@ class CustomTabBar extends StatelessWidget {
   });
 
   final List<CategoryModel> categories;
-  final int selectedIndex;
   final Color selectedBg;
   final Color unselectedBg;
   final Color selectedTextColor;
   final Color unselectedTextColor;
-  final Function(int index)? onPressed;
+  final void Function(CategoryModel category)? onPressed;
 
   @override
-  Widget build(BuildContext context) =>
-      DefaultTabController(
-        length: categories.length,
-        child: TabBar(
-          indicatorColor: Colors.transparent,
-          onTap: onPressed,
-          isScrollable: true,
-          tabs: categories.asMap().entries.map(
-                (entry) {
-              final index = entry.key;
-              final category = entry.value;
-              final bool isSelected = index == selectedIndex;
+  State<CustomTabBar> createState() => _CustomTabBarState();
+}
 
-              return Container(
-                padding: REdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                decoration: BoxDecoration(
-                  color: isSelected ? selectedBg : unselectedBg,
-                  borderRadius: BorderRadius.circular(46.r),
-                  border: Border.all(color: selectedBg, width: 1.w),
-                ),
-                child: Row(
-                  children: [
-                    Icon(
-                      category.icon,
-                      color: isSelected ? selectedTextColor : unselectedTextColor,
-                    ),
-                    SizedBox(width: 8.w),
+class _CustomTabBarState extends State<CustomTabBar> {
+  int selectedIndex = 0;
 
-                    Text(
-                      category.name,
-                      style: TextStyle(
-                        color: isSelected ? selectedTextColor : unselectedTextColor,
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
+  @override
+  Widget build(BuildContext context) => DefaultTabController(
+    length: widget.categories.length,
+    child: TabBar(
+      indicatorColor: Colors.transparent,
+      isScrollable: true,
+      onTap: (index) {
+        widget.onPressed?.call(widget.categories[index]);
+        setState(() {
+          selectedIndex = index;
+        });
+      },
+      tabs: List.generate(widget.categories.length, (index) {
+        final category = widget.categories[index];
+        final isSelected = selectedIndex == index;
+        return Tab(
+          child: Container(
+            padding: REdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            decoration: BoxDecoration(
+              color: isSelected ? widget.selectedBg : widget.unselectedBg,
+              borderRadius: BorderRadius.circular(46.r),
+              border: Border.all(color: widget.selectedBg, width: 1.w),
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  category.icon,
+                  color: isSelected
+                      ? widget.selectedTextColor
+                      : widget.unselectedTextColor,
                 ),
-              );
-            },
-          ).toList(),
-        ),
-      );
+                SizedBox(width: 8.w),
+                Text(
+                  category.name,
+                  style: TextStyle(
+                    color: isSelected
+                        ? widget.selectedTextColor
+                        : widget.unselectedTextColor,
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      }),
+    ),
+  );
 }

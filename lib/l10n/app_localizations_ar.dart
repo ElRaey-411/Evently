@@ -9,10 +9,49 @@ class AppLocalizationsAr extends AppLocalizations {
   AppLocalizationsAr([String locale = 'ar']) : super(locale);
 
   @override
+  String get successfully_registered => 'تم التسجيل بنجاح';
+
+  @override
+  String get the_account_already_exists_for_that_email =>
+      'يوجد حساب مسجّل بالفعل بهذا البريد الإلكتروني.';
+
+  @override
+  String get failed_to_register => 'فشل في عملية التسجيل';
+
+  @override
+  String get successfully_logged_in => 'تم تسجيل الدخول بنجاح';
+
+  @override
+  String get invalid_email_or_password =>
+      'البريد الإلكتروني أو كلمة المرور غير صحيحة';
+
+  @override
+  String get failed_to_login => 'فشل في تسجيل الدخول';
+
+  @override
+  String get successfully_logged_out => 'تم تسجيل الخروج بنجاح';
+
+  @override
+  String get please_select_time_and_date => 'من فضلك اختر التاريخ والوقت';
+
+  @override
+  String get event_added_successfully => 'تمت إضافة الحدث بنجاح';
+
+  @override
+  String get please_fill_all_fields_correctly =>
+      'من فضلك املأ جميع الحقول بشكل صحيح';
+
+  @override
   String get this_field_is_required => 'هذا الحقل مطلوب';
 
   @override
   String get name_is_required => 'الاسم مطلوب';
+
+  @override
+  String get no_favourite_events_found => 'لم يتم العثور على فعاليات مفضلة';
+
+  @override
+  String get search_for_event => 'ابحث عن فعالية';
 
   @override
   String get name_must_be_at_least_4_characters =>
@@ -94,9 +133,6 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get profile => 'الملف الشخصي';
-
-  @override
-  String get search_for_event => 'ابحث عن فعالية';
 
   @override
   String get language => 'اللغة';

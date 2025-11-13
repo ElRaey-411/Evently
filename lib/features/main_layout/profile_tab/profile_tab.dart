@@ -1,11 +1,14 @@
+import 'package:evently/core/models/user_model.dart';
 import 'package:evently/core/resources/colors_manager.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-
 import '../../../config/providers/config_provider.dart';
 import '../../../core/resources/assets_manager.dart';
+import '../../../core/routes_manager/routes_manager.dart';
 import '../../../core/widgets/custom_drop_down_button.dart';
+import '../../../core/widgets/ui_utils/ui_utils.dart';
 import '../../../l10n/app_localizations.dart';
 
 class ProfileTab extends StatefulWidget {
@@ -51,13 +54,13 @@ class _ProfileTabState extends State<ProfileTab> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Ahmed", style: Theme
+                      Text(UserModel.currentUser!.name, style: Theme
                           .of(context)
                           .textTheme
                           .titleLarge),
                       SizedBox(height: 10.w),
                       Text(
-                        "Ahmed123@gmail.com",
+                        UserModel.currentUser!.email,
                         style: Theme
                             .of(context)
                             .textTheme
@@ -117,7 +120,9 @@ class _ProfileTabState extends State<ProfileTab> {
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                     backgroundColor: ColorsManager.red),
-                onPressed: () {},
+                onPressed: () {
+                  logout();
+                },
                 child: Padding(
                   padding: REdgeInsets.symmetric(horizontal: 16),
                   child: Row(
@@ -145,4 +150,11 @@ class _ProfileTabState extends State<ProfileTab> {
         ),
       );
 }
+void logout() async{
+    UIUtils.showLoading(context);
+    await FirebaseAuth.instance.signOut();
+    UIUtils.toastMessage(AppLocalizations.of(context)!.successfully_logged_out, Colors.green);
+    UIUtils.hideDialog(context);
+    Navigator.pushReplacementNamed(context, RoutesManager.login);
+  }
 }

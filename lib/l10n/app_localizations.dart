@@ -98,6 +98,66 @@ abstract class AppLocalizations {
     Locale('en'),
   ];
 
+  /// No description provided for @successfully_registered.
+  ///
+  /// In en, this message translates to:
+  /// **'Successfully Registered'**
+  String get successfully_registered;
+
+  /// No description provided for @the_account_already_exists_for_that_email.
+  ///
+  /// In en, this message translates to:
+  /// **'The account already exists for that email.'**
+  String get the_account_already_exists_for_that_email;
+
+  /// No description provided for @failed_to_register.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed To Register'**
+  String get failed_to_register;
+
+  /// No description provided for @successfully_logged_in.
+  ///
+  /// In en, this message translates to:
+  /// **'Successfully Logged In'**
+  String get successfully_logged_in;
+
+  /// No description provided for @invalid_email_or_password.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid Email or Password'**
+  String get invalid_email_or_password;
+
+  /// No description provided for @failed_to_login.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed To Login'**
+  String get failed_to_login;
+
+  /// No description provided for @successfully_logged_out.
+  ///
+  /// In en, this message translates to:
+  /// **'Successfully logged out'**
+  String get successfully_logged_out;
+
+  /// No description provided for @please_select_time_and_date.
+  ///
+  /// In en, this message translates to:
+  /// **'Please Select Time and Date'**
+  String get please_select_time_and_date;
+
+  /// No description provided for @event_added_successfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Event added successfully'**
+  String get event_added_successfully;
+
+  /// No description provided for @please_fill_all_fields_correctly.
+  ///
+  /// In en, this message translates to:
+  /// **'Please fill all fields correctly'**
+  String get please_fill_all_fields_correctly;
+
   /// No description provided for @this_field_is_required.
   ///
   /// In en, this message translates to:
@@ -109,6 +169,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Name is required'**
   String get name_is_required;
+
+  /// No description provided for @no_favourite_events_found.
+  ///
+  /// In en, this message translates to:
+  /// **'No favourite events found'**
+  String get no_favourite_events_found;
+
+  /// No description provided for @search_for_event.
+  ///
+  /// In en, this message translates to:
+  /// **'Search for Event'**
+  String get search_for_event;
 
   /// No description provided for @name_must_be_at_least_4_characters.
   ///
@@ -265,12 +337,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Profile'**
   String get profile;
-
-  /// No description provided for @search_for_event.
-  ///
-  /// In en, this message translates to:
-  /// **'Search for Event'**
-  String get search_for_event;
 
   /// No description provided for @language.
   ///

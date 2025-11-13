@@ -2,12 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import '../../config/providers/config_provider.dart';
+import '../../firebase/firebase_service.dart';
 import '../models/event_model.dart';
 
-class EventItem extends StatelessWidget {
-  EventItem({super.key, required this.event});
+class EventItem extends StatefulWidget {
+  EventItem({super.key, required this.event,required this.isFavorite,this.onTap});
 
   EventModel event;
+  bool isFavorite ;
+  void Function()? onTap;
+
+  @override
+  State<EventItem> createState() => _EventItemState();
+}
+
+class _EventItemState extends State<EventItem> {
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +38,7 @@ class EventItem extends StatelessWidget {
             borderRadius: BorderRadius.circular(16.r),
             child: Image.asset(
               configProvider.isDark?
-              event.category.darkPhotoPath!:event.category.lightPhotoPath!,
+              widget.event.category.darkPhotoPath!:widget.event.category.lightPhotoPath!,
               fit: BoxFit.cover,
               width: double.infinity,
             ),
@@ -50,11 +59,11 @@ class EventItem extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
-                    event.eventDateTime.day.toString(),
+                    widget.event.dateTime.day.toString(),
                     style: Theme.of(context).textTheme.labelLarge,
                   ),
                   Text(
-                    getMonthName(event.eventDateTime.month),
+                    getMonthName(widget.event.dateTime.month),
                     style: Theme.of(context).textTheme.labelLarge,
                   ),
                 ],
@@ -76,15 +85,27 @@ class EventItem extends StatelessWidget {
               child: Row(
                 children: [
                   Text(
-                    event.eventTitle,
+                    widget.event.title,
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
                   Spacer(),
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      setState(() {
+                        widget.onTap?.call();
+                        if(widget.isFavorite){
+                          FirebaseService.removeEventToFavourites(widget.event);
+                          widget.isFavorite = false;
+                        }else{
+                          FirebaseService.addEventToFavourites(widget.event);
+                          widget.isFavorite = true;
+                        }
+                      });
+                    },
                     icon: Icon(
-                      Icons.favorite_border_outlined,
+                      widget.isFavorite ? Icons.favorite : Icons.favorite_border,
                       color: Theme.of(context).highlightColor,
+
                     ),
                   ),
                 ],

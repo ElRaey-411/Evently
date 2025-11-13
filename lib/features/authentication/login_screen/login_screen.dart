@@ -1,13 +1,17 @@
+import 'package:evently/core/models/login_request.dart';
 import 'package:evently/core/resources/colors_manager.dart';
 import 'package:evently/core/widgets/custom_text_form.dart';
+import 'package:evently/firebase/firebase_service.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import '../../../core/models/user_model.dart';
 import '../../../core/resources/assets_manager.dart';
 import '../../../core/routes_manager/routes_manager.dart';
 import '../../../core/widgets/custom_text_button.dart';
+import '../../../core/widgets/ui_utils/ui_utils.dart';
 import '../../../l10n/app_localizations.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -20,9 +24,6 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   late TextEditingController emailController = TextEditingController();
   late TextEditingController passwordController = TextEditingController();
-  late GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
-
 
   @override
   void dispose() {
@@ -30,6 +31,7 @@ class _LoginScreenState extends State<LoginScreen> {
     passwordController.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     AppLocalizations appLocalizations = AppLocalizations.of(context)!;
@@ -37,9 +39,7 @@ class _LoginScreenState extends State<LoginScreen> {
       resizeToAvoidBottomInset: true,
       body: SingleChildScrollView(
         child: Padding(
-          padding: MediaQuery
-              .of(context)
-              .viewInsets,
+          padding: MediaQuery.of(context).viewInsets,
           child: SafeArea(
             child: Column(
               children: [
@@ -53,7 +53,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     children: [
                       CustomTextForm(
                         controller: emailController,
-                        lableText:appLocalizations.email,
+                        lableText: appLocalizations.email,
                         keyboardType: TextInputType.emailAddress,
                         prefixIcon: Icon(Icons.email),
                       ),
@@ -74,17 +74,19 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                       SizedBox(height: 20.h),
-                      ElevatedButton(onPressed: () {}, child: Text(appLocalizations.login)),
+                      ElevatedButton(
+                        onPressed: () {
+                          login();
+                        },
+                        child: Text(appLocalizations.login),
+                      ),
                       SizedBox(height: 20.h),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
                             appLocalizations.already_have_account,
-                            style: Theme
-                                .of(context)
-                                .textTheme
-                                .bodyMedium,
+                            style: Theme.of(context).textTheme.bodyMedium,
                           ),
                           CustomTextButton(
                             text: appLocalizations.register,
@@ -164,5 +166,29 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
+  }
+
+  void login() async {
+    AppLocalizations appLocalizations = AppLocalizations.of(context)!;
+    try {
+      UIUtils.showLoading(context, isDismissible: false);
+      UserCredential userCredential = await FirebaseService.login(
+        LoginRequest(
+          email: emailController.text,
+          password: passwordController.text,
+        ),
+      );
+     UserModel.currentUser = await FirebaseService.getUserFromFireStore(userCredential.user!.uid);
+      UIUtils.hideDialog(context);
+      UIUtils.toastMessage(appLocalizations.successfully_logged_in, Colors.green);
+      Navigator.pushReplacementNamed(context, RoutesManager.mainLayout);
+    }on FirebaseAuthException catch (e) {
+      UIUtils.hideDialog(context);
+      UIUtils.toastMessage(appLocalizations.invalid_email_or_password, ColorsManager.red);
+    }catch (e) {
+      UIUtils.hideDialog(context);
+      UIUtils.toastMessage(appLocalizations.failed_to_login, ColorsManager.red);
+    }
+
   }
 }

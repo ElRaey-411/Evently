@@ -23,11 +23,6 @@ class ThemeManager {
         side: BorderSide(color: ColorsManager.white, width: 4),
       ),
     ),
-    bottomAppBarTheme: BottomAppBarThemeData(
-      color: ColorsManager.white,
-      elevation: 0,
-      shape: CircularNotchedRectangle(),
-    ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       elevation: 0,
       backgroundColor: ColorsManager.blue,
