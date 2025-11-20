@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import '../../../config/providers/config_provider.dart';
 import '../../../core/models/event_model.dart';
+import '../../../core/routes_manager/routes_manager.dart';
 import '../../../core/widgets/custom_tab_bar.dart';
 import '../../../core/widgets/event_item.dart';
 import '../../../firebase/firebase_service.dart';
@@ -134,6 +135,7 @@ class _HomeTabState extends State<HomeTab> {
                   itemBuilder:
                       (context, index) =>
                       EventItem(
+                        onEventDetails: () => onEventDetails(events[index]),
                         event: events[index],
                         isFavorite: UserModel.currentUser!.favoritesEventsIds.contains(events[index].id),
                       ),
@@ -146,9 +148,11 @@ class _HomeTabState extends State<HomeTab> {
         ],
       ),
     );
+
   }
 
 
-
-
+  void onEventDetails(EventModel event){
+    Navigator.pushNamed(context, RoutesManager.eventDetails,arguments: event);
+  }
 }

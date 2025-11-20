@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import '../../../core/models/user_model.dart';
 import '../../../core/resources/assets_manager.dart';
 import '../../../core/routes_manager/routes_manager.dart';
@@ -140,7 +141,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             borderRadius: BorderRadius.circular(16.r),
                           ),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          loginWithGoogle();
+                        },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -190,5 +193,37 @@ class _LoginScreenState extends State<LoginScreen> {
       UIUtils.toastMessage(appLocalizations.failed_to_login, ColorsManager.red);
     }
 
+  }
+
+  Future<void>  loginWithGoogle() async {
+    AppLocalizations appLocalizations = AppLocalizations.of(context)!;
+    try {
+      final GoogleSignIn googleSignIn = GoogleSignIn.instance;
+
+     await googleSignIn.initialize(
+       serverClientId:"135565927281-gacstclg25d6gtoigfj45i2gr0roaojk.apps.googleusercontent.com"
+     );
+
+      final GoogleSignInAccount? googleUser = await googleSignIn.authenticate();
+      if (googleUser == null) return;
+      final GoogleSignInAuthentication googleAuth = googleUser.authentication;
+
+      final credential = GoogleAuthProvider.credential(idToken: googleAuth.idToken);
+
+     UserCredential userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
+
+     UserModel userModel = UserModel(
+       id: userCredential.user!.uid,
+       email: userCredential.user!.email!,
+       name: userCredential.user!.displayName!,
+       favoritesEventsIds: []
+     );
+     await FirebaseService.addUserToFireStore(userModel);
+     UserModel.currentUser = userModel;
+      UIUtils.toastMessage(appLocalizations.successfully_logged_in, Colors.green);
+     Navigator.pushReplacementNamed(context, RoutesManager.mainLayout);
+    }catch(e){
+      print(e.toString());
+    }
   }
 }

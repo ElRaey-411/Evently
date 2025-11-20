@@ -71,7 +71,7 @@ class _FavoriteTabState extends State<FavoriteTab> {
                       itemBuilder: (context, index) {
                         final event = favouriteEvents[index];
                         return EventItem(
-                          onTap: () {
+                          onFavourite: () {
                             setState(() {});
                           },
                           event: event,

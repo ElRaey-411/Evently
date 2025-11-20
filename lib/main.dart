@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'config/providers/config_provider.dart';
+import 'config/providers/map_tab_provider.dart';
 import 'core/models/user_model.dart';
 import 'core/prefs_manager/prefs_manager.dart';
 import 'core/routes_manager/routes_manager.dart';
@@ -24,10 +25,13 @@ Future<void> main() async {
   }
 
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => ConfigProvider(),
-      child: EventlyApp(),
-    ),
+      MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (context) => ConfigProvider()),
+          ChangeNotifierProvider(create: (context) => MapTabProvider()),
+        ],
+        child: EventlyApp(),
+      )
   );
 }
 

@@ -31,7 +31,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get successfully_logged_out => 'Successfully logged out';
 
   @override
-  String get please_select_time_and_date => 'Please Select Time and Date';
+  String get please_select_time => 'Please Select Time';
+
+  @override
+  String get please_select_date => 'Please Select Date';
+
+  @override
+  String get edit_event => 'Edit Event';
+
+  @override
+  String get unknown => 'Unknown';
+
+  @override
+  String get event_updated_successfully => 'Event Updated Successfully';
 
   @override
   String get event_added_successfully => 'Event added successfully';
@@ -51,6 +63,15 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get search_for_event => 'Search for Event';
+
+  @override
+  String get my_location => 'My Location';
+
+  @override
+  String get please_select_event_location => 'Please Select Event Location';
+
+  @override
+  String get this_is_my_current_location => 'This is my current location';
 
   @override
   String get name_must_be_at_least_4_characters =>

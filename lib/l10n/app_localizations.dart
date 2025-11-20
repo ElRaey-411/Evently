@@ -140,11 +140,35 @@ abstract class AppLocalizations {
   /// **'Successfully logged out'**
   String get successfully_logged_out;
 
-  /// No description provided for @please_select_time_and_date.
+  /// No description provided for @please_select_time.
   ///
   /// In en, this message translates to:
-  /// **'Please Select Time and Date'**
-  String get please_select_time_and_date;
+  /// **'Please Select Time'**
+  String get please_select_time;
+
+  /// No description provided for @please_select_date.
+  ///
+  /// In en, this message translates to:
+  /// **'Please Select Date'**
+  String get please_select_date;
+
+  /// No description provided for @edit_event.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Event'**
+  String get edit_event;
+
+  /// No description provided for @unknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown'**
+  String get unknown;
+
+  /// No description provided for @event_updated_successfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Event Updated Successfully'**
+  String get event_updated_successfully;
 
   /// No description provided for @event_added_successfully.
   ///
@@ -181,6 +205,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Search for Event'**
   String get search_for_event;
+
+  /// No description provided for @my_location.
+  ///
+  /// In en, this message translates to:
+  /// **'My Location'**
+  String get my_location;
+
+  /// No description provided for @please_select_event_location.
+  ///
+  /// In en, this message translates to:
+  /// **'Please Select Event Location'**
+  String get please_select_event_location;
+
+  /// No description provided for @this_is_my_current_location.
+  ///
+  /// In en, this message translates to:
+  /// **'This is my current location'**
+  String get this_is_my_current_location;
 
   /// No description provided for @name_must_be_at_least_4_characters.
   ///

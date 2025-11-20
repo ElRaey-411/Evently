@@ -71,8 +71,14 @@ class FirebaseService {
     DocumentReference<EventModel> eventDoc = eventCollection.doc();
     event.id = eventDoc.id;
     return eventDoc.set(event);
-
   }
+
+  static Future<void> updateEvent(EventModel event, BuildContext context) {
+    CollectionReference<EventModel> eventCollection = _getEventCollection(context);
+    DocumentReference<EventModel> eventDoc = eventCollection.doc(event.id);
+    return eventDoc.update(event.toJson());
+  }
+
 
   static Future<List<EventModel>> getEventFromFireStore(BuildContext context, [CategoryModel? category]) async {
     CollectionReference<EventModel> eventCollection = _getEventCollection(context);
@@ -121,5 +127,12 @@ class FirebaseService {
     }
     return favouriteEvents;
   }
+
+  static Future<void> updateEventToFireStore(EventModel event, BuildContext context) async {
+    CollectionReference<EventModel> eventCollection = _getEventCollection(context);
+    DocumentReference<EventModel> eventDoc = eventCollection.doc(event.id);
+    await eventDoc.update(event.toJson());
+  }
+
 
 }

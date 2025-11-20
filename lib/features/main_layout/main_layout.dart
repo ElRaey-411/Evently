@@ -1,6 +1,7 @@
-import 'package:evently/core/resources/colors_manager.dart';
 import 'package:evently/features/main_layout/profile_tab/profile_tab.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../../config/providers/map_tab_provider.dart';
 import '../../core/routes_manager/routes_manager.dart';
 import '../../l10n/app_localizations.dart';
 import 'favorite_tab/favorite_tab.dart';
@@ -18,7 +19,9 @@ class _MainLayoutState extends State<MainLayout> {
   int selectedIndex = 0;
   List<Widget> pages = [
     HomeTab(),
-    MapTab(),
+    ChangeNotifierProvider(
+        create: (context) => MapTabProvider(),
+        child: MapTab()),
     FavoriteTab(),
     ProfileTab(),
   ];

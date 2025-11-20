@@ -10,6 +10,12 @@ abstract class ConstantManager{
   static String eventDescription = "eventDescription";
   static String eventDateTime = "eventDateTime";
   static String favoritesEventsIds = "favoritesEventsIds";
+  static String city = "city";
+  static String country = "country";
+  static String lat = "lat";
+  static String long = "long";
+
+
 
 
 

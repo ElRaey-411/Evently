@@ -32,7 +32,19 @@ class AppLocalizationsAr extends AppLocalizations {
   String get successfully_logged_out => 'تم تسجيل الخروج بنجاح';
 
   @override
-  String get please_select_time_and_date => 'من فضلك اختر التاريخ والوقت';
+  String get please_select_time => 'من فضلك اختر الوقت';
+
+  @override
+  String get please_select_date => 'من فضلك اختر التاريخ';
+
+  @override
+  String get edit_event => 'تعديل الحدث';
+
+  @override
+  String get unknown => 'غير معروف';
+
+  @override
+  String get event_updated_successfully => 'تم تحديث الحدث بنجاح';
 
   @override
   String get event_added_successfully => 'تمت إضافة الحدث بنجاح';
@@ -52,6 +64,15 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get search_for_event => 'ابحث عن فعالية';
+
+  @override
+  String get my_location => 'My Location';
+
+  @override
+  String get please_select_event_location => 'من فضلك اختر موقع الحدث';
+
+  @override
+  String get this_is_my_current_location => 'هذا هو موقعي الحالي';
 
   @override
   String get name_must_be_at_least_4_characters =>
